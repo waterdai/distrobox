@@ -22,3 +22,4 @@ modules:
       - ./install --prefix /app
       - cp ./host-spawn /app/bin
       - cp ./wrapper /app/bin
+      - chmod +x /app/bin/{wrapper,host-spawn}
