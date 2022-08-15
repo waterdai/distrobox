@@ -1,0 +1,23 @@
+# This manifest file is based upon the work of @axtloss in https://github.com/axtloss/flatpaks
+# Credits to their work for inspiring this one.
+---
+app-id: io.github.luca.distrobox
+runtime: org.freedesktop.Platform
+runtime-version: '21.08'
+sdk: org.freedesktop.Sdk
+command: wrapper
+finish-args:
+  - --socket=session-bus
+env:
+  - TERM=xterm-256color
+modules:
+  - name: distrobox
+    buildsystem: simple
+    sources:
+      - type: dir
+        path: ../
+      - type: file
+        path: wrapper
+    build-commands:
+      - ./install --prefix /app
+      - cp ./wrapper /app/bin
