@@ -8,8 +8,6 @@ sdk: org.freedesktop.Sdk
 command: wrapper
 finish-args:
   - --socket=session-bus
-env:
-  - TERM=xterm-256color
 modules:
   - name: distrobox
     buildsystem: simple
@@ -18,6 +16,9 @@ modules:
         path: ../
       - type: file
         path: wrapper
+      - type: file
+        path: host-spawn
     build-commands:
       - ./install --prefix /app
+      - cp ./host-spawn /app/bin
       - cp ./wrapper /app/bin
