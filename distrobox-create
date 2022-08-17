@@ -491,6 +491,12 @@ generate_command() {
 		--volume /run/user/${container_user_uid}:/run/user/${container_user_uid}:rslave"
 	fi
 
+	# Mount also the XDG_RUNTIME_DIR to ensure functionality of the apps.
+	if [ -d "/run/flatpak" ]; then
+		result_command="${result_command}
+		--volume /run/flatpak:/run/flatpak:rslave"
+	fi
+
 	# These are dynamic configs needed by the container to function properly
 	# and integrate with the host
 	#
