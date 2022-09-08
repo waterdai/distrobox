@@ -97,7 +97,7 @@ fi
 
 if [ "${remove}" -ne 0 ]; then
 	printf >&2 "\033[1;31m Resetting...\n\033[0m"
-	"${dest_path}/bin/podman" system reset -f > /dev/null
+	"${dest_path}/bin/podman" system reset -f > /dev/null --runtime="${dest_path}/bin/runc"
 	printf >&2 "\033[1;31m Removing...\n\033[0m"
 	rm -r "${dest_path}" "${conf_path}/containers" "${prefix}/bin/podman"
 	printf >&2 "\033[1;31m Done.\n\033[0m"
@@ -151,7 +151,7 @@ rm -rf /tmp/podman-linux-amd64/
 
 printf >&2 "\033[1;31m Migrating...\n\033[0m"
 
-"${dest_path}/bin/podman" system migrate
+"${dest_path}/bin/podman" system migrate --runtime="${dest_path}/bin/runc"
 ln -sf "${dest_path}/bin/podman" "${prefix}/bin/podman"
 
 printf >&2 "Successfully installed to %s.\n" "${dest_path}"
